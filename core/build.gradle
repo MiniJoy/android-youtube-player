@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply from: "$rootProject.rootDir.absolutePath/gradle/publish.gradle"
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion compileSdk
@@ -18,12 +18,21 @@ android {
         }
     }
 }
-//
-//tasks.withType(Javadoc) {
-//    options.addStringOption('Xdoclint:none', '-quiet')
-//    options.addStringOption('encoding', 'UTF-8')
-//    options.addStringOption('charSet', 'UTF-8')
-//}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+publish {
+    userOrg = 'felix0503'
+    groupId = 'com.minijoy'
+    artifactId = 'youtube-player'
+    publishVersion = versionName_core
+    desc = 'Android YouTube Player'
+    website = 'https://github.com/MiniJoy/android-youtube-player'
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

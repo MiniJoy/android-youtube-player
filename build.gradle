@@ -17,38 +17,19 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.0.1"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1'
+        classpath 'com.novoda:bintray-release:0.9.1'
     }
 }
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-def artifactory_username = properties.getProperty("artifactory_username")
-def artifactory_password = properties.getProperty("artifactory_password")
 
 allprojects {
     repositories {
         google()
         jcenter()
         mavenCentral()
-        maven {
-            url "http://47.88.228.53:8081/artifactory/libs-release-local"
-            credentials {
-                username = artifactory_username
-                password = artifactory_password
-            }
-        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    groupName = 'com.tongzhuo'
-    releaseVersionName = "9.0.1.3"
 }
 
