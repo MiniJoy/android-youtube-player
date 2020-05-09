@@ -7,6 +7,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.player.listeners.YouTubeP
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -49,7 +50,8 @@ class WebViewYouTubePlayer extends WebView implements YouTubePlayer, YouTubePlay
     }
 
     protected WebViewYouTubePlayer(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        super(Build.VERSION.SDK_INT < Build.VERSION_CODES.M ? context.getApplicationContext()
+                : context, attrs, defStyleAttr);
 
         mainThreadHandler = new Handler(Looper.getMainLooper());
         youTubePlayerListeners = new HashSet<>();
